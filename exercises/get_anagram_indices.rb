@@ -1,20 +1,25 @@
-def getAnagramIndices(haystack, needle)
+# given 'haystack' a 'needle' a pair of strings, return the indices of anagrams
+# of 'needle' inside of 'haystack'
+def get_anagram_indices(haystack, needle)
+  raise ArgumentError unless haystack.is_a? String
+  raise ArgumentError unless needle.is_a? String
+
   output = []
 
   for pos in 0..(haystack.length - needle.length)
-    p "Pos: #{pos}, haystack: #{haystack[pos, needle.length]}, needle: #{needle}"
     if is_anagram(haystack[pos, needle.length], needle)
       output << pos
     end
-    p "after=haystack: #{haystack[pos, needle.length]}, needle: #{needle}"
   end
 
   return output
 end
 
+private
+
 def is_anagram(s1, s2)
   aux = s2.dup
-  
+
   if s1.length != s2.length
     return false
   end
