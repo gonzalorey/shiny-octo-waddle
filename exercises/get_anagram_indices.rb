@@ -7,9 +7,7 @@ def get_anagram_indices(haystack, needle)
   output = []
 
   for pos in 0..(haystack.length - needle.length)
-    if is_anagram(haystack[pos, needle.length], needle)
-      output << pos
-    end
+    output << pos if is_anagram(haystack[pos, needle.length], needle)
   end
 
   return output
@@ -18,19 +16,14 @@ end
 private
 
 def is_anagram(s1, s2)
-  aux = s2.dup
+  return false unless s1.length == s2.length
 
-  if s1.length != s2.length
-    return false
-  end
+  aux = s2.dup
 
   s1.each_char do |s|
     index = aux.index(s)
-    if index
-        aux.slice!(index)
-    else
-        return false
-    end
+    return false unless index
+    aux.slice!(index)
   end
 
   return true
